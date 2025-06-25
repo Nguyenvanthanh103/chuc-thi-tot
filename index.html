@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tin Nhắn Chúc Thi Tốt</title>
+  <style>
+    body {
+      margin: 0;
+      background: #e5ddd5;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-box {
+      background: #fff;
+      width: 360px;
+      height: 500px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 15px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+
+    .message .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .message .bubble {
+      background: #dcf8c6;
+      padding: 10px 14px;
+      border-radius: 18px;
+      max-width: 220px;
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #388E3C;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-box" id="chatBox">
+    <button onclick="startMessages()">Nhận Lời Chúc 💌</button>
+  </div>
+
+  <script>
+    const messages = [
+      "Hi bạn thân iu 💖",
+      "Tớ biết kỳ thi sắp tới khiến cậu áp lực 😥",
+      "Nhưng tớ tin cậu sẽ làm thật tốt! 💪",
+      "Học gì trúng đó, nhớ kỹ điều quan trọng nhé ✨",
+      "Thi xong rồi mình đi ăn mừng nhéee 🍔🍧",
+      "Chúc bạn thi thật tốt nhaa 💯💖 Fighting!!! 💥"
+    ];
+
+    function startMessages() {
+      const chat = document.getElementById('chatBox');
+      const button = chat.querySelector('button');
+      button.remove();
+
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < messages.length) {
+          const msgDiv = document.createElement('div');
+          msgDiv.className = 'message';
+          msgDiv.style.animationDelay = `${i * 0.5}s`;
+
+          const avatar = document.createElement('img');
+          avatar.className = 'avatar';
+          avatar.src = 'https://cdn-icons-png.flaticon.com/512/147/147144.png';
+
+          const bubble = document.createElement('div');
+          bubble.className = 'bubble';
+          bubble.textContent = messages[i];
+
+          msgDiv.appendChild(avatar);
+          msgDiv.appendChild(bubble);
+          chat.appendChild(msgDiv);
+
+          chat.scrollTop = chat.scrollHeight;
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
